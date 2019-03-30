@@ -1,2 +1,2 @@
 # Vasilev Dmitrii M3303            
-[First lab](https://github.com/JoCoKo/JoCoKo.github.io/blob/master/Web_1/index.html)
+[First lab](https://JoCoKo.github.io/Web_1/index.html)
