@@ -1,0 +1,60 @@
+body {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+.header {
+	margin: 2%;
+	display: block;
+	width: 96%;
+	height: 120px;
+	background-color: #FFFF00;
+
+}
+.menu {
+	margin-right: 2%;
+	margin-left: 2%;
+	display: inline-block;
+	width: 12%;
+	height: 700px;
+	background-color: #40E0D0;
+}
+.content {
+	display: inline-block;
+	width: 60%;
+	height: 700px;
+	background-color: #87CEFA;
+	margin-right: 2%;
+}
+.stuff {
+	display: inline-block;
+	width: 19%;
+	height: 700px;
+	background-color: #808080;
+	margin-right: 2%;
+}
+
+
+
+@media (max-width: 1200px) {
+	.stuff {
+		display: none;
+	}
+	.content {
+		width: 81%;
+	}
+}
+
+@media (max-width: 400px) {
+	.stuff {
+		display: none;
+	}
+	.menu {
+		width: 96%;
+		margin-bottom: 2%;
+	}
+	.content {
+		margin-left: 2%;
+		width: 96%;
+	}
+}
