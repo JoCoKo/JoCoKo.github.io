@@ -1,0 +1,32 @@
+@font-face {
+font-family: 'ProximaNova';
+src: url('ProximaNova-Regular.eot');
+src: url('ProximaNova-Regular.eot?#iefix') format('embedded-opentype'),
+url('ProximaNova-Regular.woff') format('woff'),
+url('ProximaNova-Regular.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
+
+body{
+	font-family: 'ProximaNova', sans-serif;
+	color: #6b3021;
+	background-color: #f6dcbf;
+	text-align: center;
+}
+
+.headline{
+	font-size:30pt; 
+}
+.headline2{
+	font-size:23pt; 
+}
+.description{
+	font-size: 18pt;
+}
+.nav-link{
+	color: inherit;
+}
+.navbar{
+	background-color: #dba872;
+}
