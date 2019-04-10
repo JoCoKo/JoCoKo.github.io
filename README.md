@@ -3,4 +3,4 @@
 
 [Second lab](https://JoCoKo.github.io/2/index.html)
 
-[Third lab](https://JoCoKo.github.io/3/index.html)
+[Third lab](https://jocoko.github.io/3/index.html)
