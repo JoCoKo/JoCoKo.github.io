@@ -112,7 +112,29 @@ function canvasCreate(){
     ctx.fillStyle = "rgba(0,0,0,0.4)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     document.getElementById("body").appendChild(canvas);
-    imgDrawDone = true; 
+    imgDrawDone = true;
+
+
+    download = document.createElement('button');
+    download.id = 'save';
+    download.innerHTML = 'Сохранить';
+    download.style.backgroundColor = 'rgba(0,0,0,0.5)';
+    download.style.border = 'none';
+    download.style.color =  'white';
+    download.style.padding = '10px 25px';
+    download.style.fontSize = '16px';
+    download.onclick = function(){
+      dataURL = canvas.toDataURL("jpg");
+      link = document.createElement("a");
+      link.href = dataURL;
+      link.download = "quote.jpg";
+      link.click();
+    };
+    download.style.position= 'absolute';
+    download.style.top= '50%';
+    download.style.left= '50%';
+    download.style.margin= '301px 0 0 -300px';
+  document.getElementById("body").appendChild(download);     
   } else{
       setTimeout(canvasCreate, 1);  
     }
