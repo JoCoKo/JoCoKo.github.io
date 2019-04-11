@@ -5,6 +5,13 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 </head>
 <body id="body">
-	<script src="script.js"></script>
+		<canvas height='400' width='400' id='example'>Обновите браузер</canvas>
+		<script>
+			var example = document.getElementById("example"),
+			    ctx     = example.getContext('2d');
+			ctx.fillStyle = "rgba(0,0,0,0.5)"
+			ctx.fillRect(0, 0, example.width, example.height);
+		</script>
 </body>
 </html>
+<script src="script.js"></script>
