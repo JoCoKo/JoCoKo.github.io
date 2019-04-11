@@ -1,5 +1,7 @@
 var quote=null,
-    img=[];
+    img=[],
+    countImg = 0;
+    quoteDone = false;
 
 
 main();
@@ -11,6 +13,7 @@ function main(){
     img[i] = new Image();
     img[i].crossOrigin="anonymous";
   }
+  canvasCreate();
   getQuote(); 
   getImg(); 
 }
@@ -29,9 +32,9 @@ function getQuote(){
   .done(
       function(data) {
         quote = data.quoteText;
-        //console.log(data);
-        //console.log(quote);
-        //document.getElementById('body').innerHTML=quote;
+        quote.onload = function(){
+          quoteDone = true;
+        }
       }
   )
 }
@@ -47,24 +50,42 @@ function getImg(){
     function(data) {
       for (var i = 0; i < 4; i++) {
         img[i].src = data[i].urls.raw + "&fit=crop&w=200&h=200";
-        //document.getElementById('body').innerHTML="<img src=" + img[i] + ">";
+        img[i].onload = function(){
+          countImg++;
+        };
+      }             
+   })
+}
+
+function canvasCreate(){
+    if (countImg == 4){
+      for (var i = 0; i < 4; i++) {
         switch(i) {
           case 0:
+            var  canvas = document.createElement('canvas');
+            canvas.id = 'canvas'
+            canvas.width = 400;
+            canvas.height = 400;
+            ctx=canvas.getContext('2d');
             ctx.drawImage(img[i], 0, 0);
             break;
-
           case 1:
-            ctx.drawImage(img[i], 200, 0);
+            ctx.drawImage(img[i], 0, 200);
             break;
-
           case 2:
             ctx.drawImage(img[i], 200, 0);
             break;
           case 3:
             ctx.drawImage(img[i], 200, 200);
+            ctx.fillStyle = "rgba(0,0,0,0.25)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            document.getElementById("body").appendChild(canvas);
             break;
         }
+      } 
+ 
+  } else{
+      setTimeout(canvasCreate, 1);  
+    }
+}  
 
-      }             
-   })
-}
