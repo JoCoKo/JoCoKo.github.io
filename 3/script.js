@@ -45,7 +45,7 @@ function drawQuote(){
     textBlock.font = "italic 22pt cursive";
     textBlock.textAlign = "center";
     textBlock.textBaseline = "middle";
-    cutQuote(textBlock, quote, canvas.height / 2, 20, 40);
+    cutQuote(textBlock, quote, canvas.height / 2, 30, 40);
     //console.log(quote);
   }
   else{
