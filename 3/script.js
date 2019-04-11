@@ -45,7 +45,7 @@ function drawQuote(){
     textBlock.font = "italic 22pt cursive";
     textBlock.textAlign = "center";
     textBlock.textBaseline = "middle";
-    cutQuote(textBlock, quote, canvas.height / 2, 30, 40);
+    cutQuote(textBlock, quote, canvas.height / 2, 27, 38);
     //console.log(quote);
   }
   else{
@@ -100,6 +100,10 @@ function canvasCreate(){
     canvas.id = 'canvas'
     canvas.width = 600;
     canvas.height = 600;
+    canvas.style.position= 'absolute';
+    canvas.style.top= '50%';
+    canvas.style.left= '50%';
+    canvas.style.margin= '-300px 0 0 -300px';
     ctx=canvas.getContext('2d');
     ctx.drawImage(img[0], 0, 0);
     ctx.drawImage(img[1], 0, 300);
