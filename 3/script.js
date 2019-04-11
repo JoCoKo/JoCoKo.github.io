@@ -1,7 +1,7 @@
 var quote=null,
     img=[],
     countImg = 0;
-    quoteDone = false;
+    imgDrawDone = false;
 
 
 main();
@@ -13,9 +13,10 @@ function main(){
     img[i] = new Image();
     img[i].crossOrigin="anonymous";
   }
+  getImg();
   canvasCreate();
-  getQuote(); 
-  getImg(); 
+  getQuote();
+  drawQuote();  
 }
 
 function getQuote(){
@@ -32,11 +33,47 @@ function getQuote(){
   .done(
       function(data) {
         quote = data.quoteText;
-        quote.onload = function(){
-          quoteDone = true;
-        }
       }
   )
+}
+function drawQuote(){ 
+  if (quote != null && imgDrawDone == true){
+    var textBlock = canvas.getContext('2d'),
+    x=100,
+    y=100;
+    textBlock.fillStyle = 'white';
+    textBlock.font = "italic 22pt cursive";
+    textBlock.textAlign = "center";
+    textBlock.textBaseline = "middle";
+    cutQuote(textBlock, quote, canvas.height / 2, 20, 40);
+    //console.log(quote);
+  }
+  else{
+     setTimeout(drawQuote, 1);  
+  }
+}
+function cutQuote(textBlock, text, y, maxLength, lineHeight){
+  var word = text.split(" "),
+      wordsInArray = [];
+      line=word[0];
+      lineCount = 0;
+  for (var i = 1; i < word.length; i++) {
+    if ((line+word[i]).length<=maxLength) {
+      line=line + " " + word[i];
+    }
+    else {
+      wordsInArray[lineCount]=line;
+      lineCount+=1;
+      line=word[i];
+    } 
+  }
+  x=y;
+  y=y-((lineCount+1)/2)*lineHeight+lineHeight/2;
+  wordsInArray[lineCount]=line;
+  for (var i = 0; i <= lineCount; i++) {
+    textBlock.fillText(wordsInArray[i],x,y);
+    y+=lineHeight
+  }
 }
 function getImg(){
   $.ajax({
@@ -49,7 +86,7 @@ function getImg(){
   .done(
     function(data) {
       for (var i = 0; i < 4; i++) {
-        img[i].src = data[i].urls.raw + "&fit=crop&w=200&h=200";
+        img[i].src = data[i].urls.raw + "&fit=crop&w=300&h=300";
         img[i].onload = function(){
           countImg++;
         };
@@ -58,32 +95,20 @@ function getImg(){
 }
 
 function canvasCreate(){
-    if (countImg == 4){
-      for (var i = 0; i < 4; i++) {
-        switch(i) {
-          case 0:
-            var  canvas = document.createElement('canvas');
-            canvas.id = 'canvas'
-            canvas.width = 400;
-            canvas.height = 400;
-            ctx=canvas.getContext('2d');
-            ctx.drawImage(img[i], 0, 0);
-            break;
-          case 1:
-            ctx.drawImage(img[i], 0, 200);
-            break;
-          case 2:
-            ctx.drawImage(img[i], 200, 0);
-            break;
-          case 3:
-            ctx.drawImage(img[i], 200, 200);
-            ctx.fillStyle = "rgba(0,0,0,0.25)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            document.getElementById("body").appendChild(canvas);
-            break;
-        }
-      } 
- 
+  if (countImg == 4){
+    var  canvas = document.createElement('canvas');
+    canvas.id = 'canvas'
+    canvas.width = 600;
+    canvas.height = 600;
+    ctx=canvas.getContext('2d');
+    ctx.drawImage(img[0], 0, 0);
+    ctx.drawImage(img[1], 0, 300);
+    ctx.drawImage(img[2], 300, 0);
+    ctx.drawImage(img[3], 300, 300);
+    ctx.fillStyle = "rgba(0,0,0,0.4)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    document.getElementById("body").appendChild(canvas);
+    imgDrawDone = true; 
   } else{
       setTimeout(canvasCreate, 1);  
     }
