@@ -1,6 +1,6 @@
 var quote=null,
     img=[],
-    countImg = 0;
+    countImg = 0,
     imgDrawDone = false;
 
 
@@ -39,9 +39,9 @@ function getQuote(){
 function drawQuote(){ 
   if (quote != null && imgDrawDone == true){
     var textBlock = canvas.getContext('2d'),
-    x=100,
-    y=100;
-    textBlock.fillStyle = 'white';
+        x=100,
+        y=100;
+        textBlock.fillStyle = 'white';
     textBlock.font = "italic 22pt cursive";
     textBlock.textAlign = "center";
     textBlock.textBaseline = "middle";
@@ -54,8 +54,8 @@ function drawQuote(){
 }
 function cutQuote(textBlock, text, y, maxLength, lineHeight){
   var word = text.split(" "),
-      wordsInArray = [];
-      line=word[0];
+      wordsInArray = [],
+      line=word[0],
       lineCount = 0;
   for (var i = 1; i < word.length; i++) {
     if ((line+word[i]).length<=maxLength) {
@@ -104,7 +104,7 @@ function canvasCreate(){
     canvas.style.top= '50%';
     canvas.style.left= '50%';
     canvas.style.margin= '-300px 0 0 -300px';
-    ctx=canvas.getContext('2d');
+    var ctx=canvas.getContext('2d');
     ctx.drawImage(img[0], 0, 0);
     ctx.drawImage(img[1], 0, 300);
     ctx.drawImage(img[2], 300, 0);
@@ -115,7 +115,7 @@ function canvasCreate(){
     imgDrawDone = true;
 
 
-    download = document.createElement('button');
+    var download = document.createElement('button');
     download.id = 'save';
     download.innerHTML = 'Сохранить';
     download.style.backgroundColor = 'rgba(0,0,0,0.5)';
