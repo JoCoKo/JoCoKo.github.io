@@ -37,7 +37,7 @@ function getQuote(){
   )
 }
 function drawQuote(){ 
-  if (quote !== null && imgDrawDone === true){
+  if (quote != null && imgDrawDone == true){
     var textBlock = canvas.getContext('2d');
     var  x=100;
     var  y=100;
@@ -45,18 +45,20 @@ function drawQuote(){
     textBlock.font = "italic 22pt cursive";
     textBlock.textAlign = "center";
     textBlock.textBaseline = "middle";
-    cutQuote(textBlock, quote, canvas.height / 2, 27, 38);
+    var params = {textBlock:textBlock, text:quote, y:canvas.height / 2, maxLength:27, lineHeight:38};
+    cutQuote(params);
     //console.log(quote);
   }
   else{
      setTimeout(drawQuote, 1);  
   }
 }
-function cutQuote(textBlock, text, y, maxLength, lineHeight){
-  var word = text.split(" ");
-  var  wordsInArray = [];
-  var line=word[0];
-  var lineCount = 0;
+function cutQuote(p){
+  var textBlock=p.textBlock, text=p.text, y=p.y, maxLength=p.maxLength, lineHeight=p.lineHeight;
+  var word = text.split(" "),
+      wordsInArray = [],
+      line=word[0],
+      lineCount = 0;
   for (var i = 1; i < word.length; i++) {
     if ((line+word[i]).length<=maxLength) {
       line=line + " " + word[i];
@@ -90,12 +92,12 @@ function getImg(){
         img[i].onload = function(){
           countImg++;
         };
-      }           
-   }) 
+      }             
+   })
 }
 
 function canvasCreate(){
-  if (countImg === 4){
+  if (countImg == 4){
     var  canvas = document.createElement('canvas');
     canvas.id = 'canvas'
     canvas.width = 600;
@@ -123,17 +125,17 @@ function canvasCreate(){
     download.style.color =  'white';
     download.style.padding = '10px 25px';
     download.style.fontSize = '16px';
-    download.style.position= 'absolute';
-    download.style.top= '50%';
-    download.style.left= '50%';
-    download.style.margin= '301px 0 0 -300px';
     download.onclick = function(){
       dataURL = canvas.toDataURL("jpg");
-      var link = document.createElement("a");
+      link = document.createElement("a");
       link.href = dataURL;
       link.download = "quote.jpg";
       link.click();
     };
+    download.style.position= 'absolute';
+    download.style.top= '50%';
+    download.style.left= '50%';
+    download.style.margin= '301px 0 0 -300px';
   document.getElementById("body").appendChild(download);     
   } else{
       setTimeout(canvasCreate, 1);  
